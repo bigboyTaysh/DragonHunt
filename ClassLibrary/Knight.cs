@@ -21,5 +21,11 @@ namespace ClassLibrary
 		{
 			AttacksPerRound = attacksPerRound;
 		}
+
+		public override string ToString()
+		{
+			return base.ToString() + 
+				$"APR: {AttacksPerRound}";
+		}
 	}
 }

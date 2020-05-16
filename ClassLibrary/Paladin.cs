@@ -22,5 +22,11 @@ namespace ClassLibrary
 		{
 			DodgeChance = dodgeChance;
 		}
+
+		public override string ToString()
+		{
+			return base.ToString() + 
+				$"DC: {DodgeChance}%\n";	
+		}
 	}
 }

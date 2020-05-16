@@ -27,7 +27,14 @@ namespace ClassLibrary
 			int intelligence = 15, int maximumHitPoints = 15, int damage = 50, int defense = 30, int maximumManaPoints = 30) 
 			: base(name, level, experiencePoints, strength, dexternity, intelligence, maximumHitPoints, damage, defense)
 		{
+			ManaPoints = maximumManaPoints;
 			MaximumManaPoints = maximumManaPoints;
+		}
+
+		public override string ToString()
+		{
+			return base.ToString() + 
+				$"MP: {ManaPoints}/{MaximumManaPoints}\n";
 		}
 	}
 }
