@@ -16,9 +16,9 @@ namespace ClassLibrary
 			set { _dodgeChance = value; }
 		}
 
-		public Paladin(string name, int level = 1, int experiencePoints = 0, int strength = 5, int dexternity = 5,
-			int intelligence = 10, int hitPoints = 15, int maximumHitPoints = 15, int damage = 50, int defense = 30, int dodgeChance = 1) 
-			: base(name, level, experiencePoints, strength, dexternity, intelligence, hitPoints, maximumHitPoints, damage, defense)
+		public Paladin(string name, int level = 1, int experiencePoints = 0, int strength = 5, int dexternity = 15,
+			int intelligence = 5, int maximumHitPoints = 15, int damage = 50, int defense = 30, int dodgeChance = 1) 
+			: base(name, level, experiencePoints, strength, dexternity, intelligence, maximumHitPoints, damage, defense)
 		{
 			DodgeChance = dodgeChance;
 		}

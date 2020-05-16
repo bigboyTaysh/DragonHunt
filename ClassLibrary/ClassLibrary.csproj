@@ -45,6 +45,7 @@
     <Compile Include="Knight.cs" />
     <Compile Include="Paladin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sorcerer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
