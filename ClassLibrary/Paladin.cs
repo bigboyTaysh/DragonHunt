@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class Paladin : Character
+    public class Paladin : Character
     {
 		private int _dodgeChance;
 

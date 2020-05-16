@@ -18,6 +18,7 @@ namespace ClassLibrary
         public int MaximumHitPoints;
         public int Damage;
         public int Defense;
+        private int _damageDealt;
 
         protected Character(string name, int level, int experiencePoints, int strength,
             int dexternity, int intelligence, int maximumHitPoints, int damage, int defense)
@@ -45,6 +46,35 @@ namespace ClassLibrary
                 $"HP: {HitPoints}/{MaximumHitPoints}\n" +
                 $"DMG: {Damage}\n" +
                 $"DEF: {Defense}\n";
+        }
+
+        public virtual void AddDamage(int damage) 
+        {
+            Damage += damage;    
+        }
+
+        public virtual void SubtractDamage(int damage)
+        {
+            Damage -= damage;
+        }
+
+        public virtual void AddDefense(int defense)
+        {
+            Defense += defense;
+        }
+
+        public virtual void SubtractDefense(int defense)
+        {
+            Defense -= defense;
+        }
+
+        public virtual void TakeDamage(int damage)
+        {
+            if(damage > Defense)
+            {
+                HitPoints -= (damage - Defense);
+            }
+            
         }
     }
 }
