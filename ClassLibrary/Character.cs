@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class Character
+    public abstract class Character
     {
+        public string Name;
+        public int Level;
+        public int ExperiencePoints;
+        public int Strength;
+        public int Dexternity;
+        public int Intelligence;
+        public int HitPoints;
+        public int MaximumHitPoints;
+        public int Damage;
     }
 }
