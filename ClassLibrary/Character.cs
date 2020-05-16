@@ -17,9 +17,10 @@ namespace ClassLibrary
         public int HitPoints;
         public int MaximumHitPoints;
         public int Damage;
+        public int Defence;
 
         protected Character(string name, int level, int experiencePoints, int strength,
-            int dexternity, int intelligence, int hitPoints, int maximumHitPoints, int damage)
+            int dexternity, int intelligence, int hitPoints, int maximumHitPoints, int damage, int defense)
         {
             Name = name;
             Level = level;
@@ -30,6 +31,7 @@ namespace ClassLibrary
             HitPoints = hitPoints;
             MaximumHitPoints = maximumHitPoints;
             Damage = damage;
+            Defence = defense;
         }
     }
 }
