@@ -68,13 +68,7 @@ namespace ClassLibrary
             Defense -= defense;
         }
 
-        public virtual void TakeDamage(int damage)
-        {
-            if(damage > Defense)
-            {
-                HitPoints -= (damage - Defense);
-            }
-            
-        }
+        public abstract void TakeDamage(int damage);
+        public abstract void LevelUp();
     }
 }
