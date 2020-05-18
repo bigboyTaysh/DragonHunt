@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public abstract class Character 
+    public abstract class Character : IComparable<Character>
     {
         public string Name;
         public int Level;
@@ -81,5 +81,10 @@ namespace ClassLibrary
         }
 
         public abstract void LevelUp();
+
+        public int CompareTo(Character other)
+        {
+            return Level.CompareTo(other.Level);
+        }
     }
 }

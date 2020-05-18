@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Character.cs" />
+    <Compile Include="Exceptions\NoManaException.cs" />
+    <Compile Include="Interfaces\IMagic.cs" />
     <Compile Include="Knight.cs" />
     <Compile Include="Paladin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

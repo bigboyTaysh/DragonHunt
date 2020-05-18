@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClassLibrary.Exceptions;
+using ClassLibrary.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class Sorcerer : Character 
+    class Sorcerer : Character, IMagic
     {
 		private int _manaPoints;
 		private int _maximumManaPoints;
@@ -49,6 +51,18 @@ namespace ClassLibrary
 			Defense += 10;
 			MaximumManaPoints += 30;
 			ManaPoints = MaximumManaPoints;
+		}
+
+		public int CastSpell(int mana)
+		{
+			if(mana > ManaPoints)
+			{
+				throw new NoManaException("Za mało many");
+			}
+
+			ManaPoints -= mana;
+
+			return Damage + mana;
 		}
 	}
 }

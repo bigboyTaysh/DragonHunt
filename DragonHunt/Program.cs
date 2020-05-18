@@ -11,6 +11,7 @@ namespace DragonHunt
     {
         static void Main(string[] args)
         {
+            
         }
     }
 }
