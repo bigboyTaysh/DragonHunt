@@ -36,5 +36,19 @@ namespace ClassLibrary
 			return base.ToString() + 
 				$"MP: {ManaPoints}/{MaximumManaPoints}\n";
 		}
+
+		public override void LevelUp()
+		{
+			Level += 1;
+			Strength += 5;
+			Dexternity += 5;
+			Intelligence += 10;
+			MaximumHitPoints += 10;
+			HitPoints = MaximumManaPoints;
+			Damage += 30;
+			Defense += 10;
+			MaximumManaPoints += 30;
+			ManaPoints = MaximumManaPoints;
+		}
 	}
 }
