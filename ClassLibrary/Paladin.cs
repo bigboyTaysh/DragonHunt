@@ -42,9 +42,11 @@ namespace ClassLibrary
 				{
 					Damage -= 1;
 				}
-				
 			}
-			
+			else
+			{
+				Console.WriteLine("Dodge!");
+			}
 		}
 
 		public override void LevelUp()
