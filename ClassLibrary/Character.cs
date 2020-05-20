@@ -19,8 +19,13 @@ namespace ClassLibrary
         public int Damage;
         public int Defense;
         private int _damageDealt;
+        
+        public Character()
+        {
 
-        protected Character(string name, int level, int experiencePoints, int strength,
+        }
+
+        public Character(string name, int level, int experiencePoints, int strength,
             int dexternity, int intelligence, int maximumHitPoints, int damage, int defense)
         {
             Name = name;
@@ -76,9 +81,9 @@ namespace ClassLibrary
 
         public abstract void LevelUp();
 
-        public int CompareTo(Character other)
+        public int CompareTo(Character character)
         {
-            return Level.CompareTo(other.Level);
+            return Level.CompareTo(character.Level);
         }
     }
 }
