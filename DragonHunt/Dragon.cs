@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ClassLibrary;
 using ClassLibrary.Interfaces;
+using ClassLibrary.Exceptions;
 
 namespace DragonHunt
 {
@@ -27,11 +28,24 @@ namespace DragonHunt
 
         public int CastSpell(int mana)
         {
-            throw new NotImplementedException();
+            if (mana > ManaPoints)
+            {
+                throw new NoManaException("Za mało many");
+            }
+
+            ManaPoints -= mana;
+
+            return Damage + mana;
         }
         public override void LevelUp()
         {
-            throw new NotImplementedException();
+            Level += 1;
+            Strength += 50;
+            Dexternity += 50;
+            Intelligence += 50;
+            MaximumHitPoints += 100;
+            Damage += 50;
+            Defense += 50;
         }
     }
 }
