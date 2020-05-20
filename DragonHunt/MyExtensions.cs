@@ -1,4 +1,5 @@
 ﻿using ClassLibrary;
+using ClassLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,33 @@ namespace DragonHunt
                 Console.WriteLine($"{character.Name} lvl up!");
             }
             Console.WriteLine($"{character.Name} lvl {character.Level}");
+        }
+
+        public static void RegenerateMana(this Sorcerer sorcerer, int mana)
+        {
+            if(sorcerer.ManaPoints + mana > sorcerer.MaximumManaPoints)
+            {
+                sorcerer.ManaPoints = sorcerer.MaximumManaPoints;
+            }
+            else
+            {
+                sorcerer.ManaPoints += mana;
+            }
+        }
+
+        public static void SubtractDamage(this Character character, int damage)
+        {
+            character.Damage -= damage;
+        }
+
+        public static void SubtractDefense(this Character character, int defense)
+        {
+            character.Defense -= defense;
+        }
+
+        public static void Meditate(this IMagic magician)
+        {
+            magician.ManaPoints = magician.MaximumManaPoints;
         }
     }
 }

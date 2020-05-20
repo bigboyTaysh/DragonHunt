@@ -53,19 +53,9 @@ namespace ClassLibrary
             Damage += damage;    
         }
 
-        public virtual void SubtractDamage(int damage)
-        {
-            Damage -= damage;
-        }
-
         public virtual void AddDefense(int defense)
         {
             Defense += defense;
-        }
-
-        public virtual void SubtractDefense(int defense)
-        {
-            Defense -= defense;
         }
 
         public virtual void TakeDamage(int damage)

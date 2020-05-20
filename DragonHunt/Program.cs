@@ -19,7 +19,6 @@ namespace DragonHunt
 
             Knight knight1 = new Knight("Knight 1");
             Knight knight2 = new Knight("Knight 2");
-
         }
     }
 }
