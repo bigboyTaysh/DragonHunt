@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class Sorcerer : Character, IMagic
+    public class Sorcerer : Character, IMagic
     {
 		private int _manaPoints;
 		private int _maximumManaPoints;
@@ -46,7 +46,7 @@ namespace ClassLibrary
 			Dexternity += 5;
 			Intelligence += 10;
 			MaximumHitPoints += 10;
-			HitPoints = MaximumManaPoints;
+			HitPoints = MaximumHitPoints;
 			Damage += 30;
 			Defense += 10;
 			MaximumManaPoints += 30;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class Knight : Character 
+    public class Knight : Character 
     {
 		private int _attacksPerRound;
 		public int AttacksPerRound
@@ -26,6 +26,18 @@ namespace ClassLibrary
 		{
 			return base.ToString() + 
 				$"APR: {AttacksPerRound}";
+		}
+
+		public override void LevelUp()
+		{
+			Level += 1;
+			Strength += 15;
+			Dexternity += 5;
+			Intelligence += 5;
+			MaximumHitPoints += 30;
+			HitPoints = MaximumHitPoints;
+			Damage += 10;
+			Defense += 30;
 		}
 	}
 }

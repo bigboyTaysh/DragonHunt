@@ -70,9 +70,13 @@ namespace ClassLibrary
 
         public virtual void TakeDamage(int damage)
         {
-            if (Damage > Defense)
+            if (damage > Defense)
             {
-                Damage -= Damage - Defense;
+                HitPoints -= damage - Defense;
+                if(HitPoints < 0)
+                {
+                    HitPoints = 0;
+                }
             }
             else
             {
