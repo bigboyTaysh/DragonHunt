@@ -29,6 +29,8 @@ namespace DragonHunt
 
         public static void IncreaseExperience(this Character character, int experience)
         {
+            
+
             character.ExperiencePoints += experience;
             while ((character.Level * 100) <= character.ExperiencePoints)
             {

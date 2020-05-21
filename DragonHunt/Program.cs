@@ -11,14 +11,51 @@ namespace DragonHunt
     {
         static void Main(string[] args)
         {
-            Sorcerer sorcerer1 = new Sorcerer("Sorcerer 1");
-            Sorcerer sorcerer2 = new Sorcerer("Sorcerer 2");
+            Console.ForegroundColor = ConsoleColor.White;
 
-            Paladin paladin1 = new Paladin("Paladin 1");
-            Paladin paladin2 = new Paladin("Paladin 2");
+            List<Character> characters = new List<Character>();
+            Sorcerer sorcerer1 = new Sorcerer("Sorcerer1");
+            Sorcerer sorcerer2 = new Sorcerer("Sorcerer2");
 
-            Knight knight1 = new Knight("Knight 1");
-            Knight knight2 = new Knight("Knight 2");
+            Paladin paladin1 = new Paladin("Paladin1");
+            Paladin paladin2 = new Paladin("Paladin2");
+
+            Knight knight1 = new Knight("Knight1");
+            Knight knight2 = new Knight("Knight2");
+
+            characters.Add(sorcerer1);
+            characters.Add(sorcerer2);
+            characters.Add(paladin1);
+            characters.Add(paladin2);
+            characters.Add(knight1);
+            characters.Add(knight2);
+
+            Dragon dragon = new Dragon
+            {
+                Name = "Dragon",
+                Level = 1,
+                ExperiencePoints = 0,
+                Strength = 20,
+                Dexternity = 20,
+                Intelligence = 20,
+                MaximumHitPoints = 300,
+                Damage = 50,
+                Defense = 50
+            };
+
+            dragon.OnBreatheFire += v => characters.ForEach(k => k.TakeDamage(v));
+
+            dragon.BreatheFire();
+
+            paladin1.IncreaseExperience(50);
+            MyExtensions.IncreaseExperience(paladin2, 50);
+
+            var under1Level = characters.Where(v => v.Level > 1).Select(v => new { v.Name, v.Level});
+
+            foreach (var item in under1Level)
+            {
+                Console.WriteLine($"Imię: {item.Name}, {item.Level}");
+            }
         }
     }
 }

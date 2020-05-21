@@ -9,10 +9,14 @@ using ClassLibrary.Exceptions;
 
 namespace DragonHunt
 {
-    public class Dragon : Character, IMagic
+    public delegate void DragonEventHandler(int damage);
+    
+    public partial class Dragon : Character, IMagic
     {
         private int _manaPoints;
         private int _maximumManaPoints;
+
+        public event DragonEventHandler OnBreatheFire;
 
         public int ManaPoints 
         {
@@ -47,5 +51,16 @@ namespace DragonHunt
             Damage += 50;
             Defense += 50;
         }
+
+        public void BreatheFire()
+        {
+            int damage = Level * Intelligence / 2;
+            Console.WriteLine($"Smok {Name} zionie ogniem: {damage}");
+
+            Sound();
+            OnBreatheFire?.Invoke(damage);
+        }
+
+        partial void Sound();
     }
 }

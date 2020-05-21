@@ -45,7 +45,7 @@ namespace ClassLibrary
 			}
 			else
 			{
-				Console.WriteLine("Dodge!");
+				Console.WriteLine("Unik!");
 			}
 		}
 

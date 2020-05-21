@@ -8,16 +8,17 @@ namespace ClassLibrary
 {
     public abstract class Character : IComparable<Character>
     {
-        public string Name;
-        public int Level;
-        public int ExperiencePoints;
-        public int Strength;
-        public int Dexternity;
-        public int Intelligence;
-        public int HitPoints;
-        public int MaximumHitPoints;
-        public int Damage;
-        public int Defense;
+        public string Name { get; set; }
+        public int Level { get; set; }
+        public int ExperiencePoints { get; set; }
+        public int Strength { get; set; }
+        public int Dexternity { get; set; }
+        public int Intelligence { get; set; }
+        public int HitPoints { get; set; }
+        public int MaximumHitPoints { get; set; }
+        public int Damage { get; set; }
+        public int Defense { get; set; }
+
         private int _damageDealt;
         
         public Character()
