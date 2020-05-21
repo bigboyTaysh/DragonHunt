@@ -18,8 +18,7 @@ namespace ClassLibrary
         public int MaximumHitPoints { get; set; }
         public int Damage { get; set; }
         public int Defense { get; set; }
-
-        private int _damageDealt;
+        public int DamageDealt { get; }
         
         public Character()
         {
@@ -78,6 +77,18 @@ namespace ClassLibrary
             {
                 Damage -= 1;
             }
+        }
+
+        public virtual void DamageDealtPerRound(int damage)
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write($"{Name} zadał: ");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(damage);
+
+            Console.ForegroundColor = ConsoleColor.White;
+
         }
 
         public abstract void LevelUp();

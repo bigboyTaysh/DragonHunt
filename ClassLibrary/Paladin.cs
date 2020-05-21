@@ -45,7 +45,7 @@ namespace ClassLibrary
 			}
 			else
 			{
-				Console.WriteLine("Unik!");
+				Console.WriteLine($"{Name}: unik!");
 			}
 		}
 

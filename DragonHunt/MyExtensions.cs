@@ -29,15 +29,18 @@ namespace DragonHunt
 
         public static void IncreaseExperience(this Character character, int experience)
         {
-            
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             character.ExperiencePoints += experience;
+
+            Console.WriteLine($"{character.Name}: {experience}xp");
             while ((character.Level * 100) <= character.ExperiencePoints)
             {
                 character.LevelUp();
                 Console.WriteLine($"{character.Name} lvl up!");
             }
-            Console.WriteLine($"{character.Name} lvl {character.Level}");
+
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void RegenerateMana(this Sorcerer sorcerer, int mana)

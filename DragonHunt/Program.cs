@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ClassLibrary;
+using ClassLibrary.Exceptions;
+using ClassLibrary.Interfaces;
 
 namespace DragonHunt
 {
@@ -14,6 +16,8 @@ namespace DragonHunt
             Console.ForegroundColor = ConsoleColor.White;
 
             List<Character> characters = new List<Character>();
+            List<Dragon> dragons = new List<Dragon>();
+
             Sorcerer sorcerer1 = new Sorcerer("Sorcerer1");
             Sorcerer sorcerer2 = new Sorcerer("Sorcerer2");
 
@@ -42,20 +46,57 @@ namespace DragonHunt
                 Damage = 50,
                 Defense = 50
             };
-
             dragon.OnBreatheFire += v => characters.ForEach(k => k.TakeDamage(v));
 
-            dragon.BreatheFire();
+            dragons.Add(dragon);
 
-            paladin1.IncreaseExperience(50);
-            MyExtensions.IncreaseExperience(paladin2, 50);
+            //dragon.BreatheFire();
 
-            var under1Level = characters.Where(v => v.Level > 1).Select(v => new { v.Name, v.Level});
+            //paladin1.IncreaseExperience(50);
+            //MyExtensions.IncreaseExperience(paladin2, 50);
 
+            //var under1Level = characters.Where(v => v.Level > 1).Select(v => new { v.Name, v.Level});
+
+            /*
             foreach (var item in under1Level)
             {
                 Console.WriteLine($"Imię: {item.Name}, {item.Level}");
             }
+            */
+            Round(dragons, characters);
+        }
+
+        static void Round(List<Dragon> dragons, List<Character> characters)
+        {
+            characters.ForEach(v => 
+            {
+                dragons.ForEach(d => 
+                { 
+                    if(v is IMagic)
+                    {
+                        try
+                        {
+                            d.TakeDamage(((IMagic)v).CastSpell(20));
+                            v.DamageDealtPerRound(((IMagic)v).CastSpell(10));
+                        }
+                        catch (NoManaException e)
+                        {
+                            Console.WriteLine($"{v.Name} nie ma many!");
+                        }
+                    }
+                    else
+                    {
+                        d.TakeDamage(v.Damage);
+                        v.DamageDealtPerRound(v.Damage);
+                    }
+                });
+            }); 
+
+            dragons.ForEach(v => v.BreatheFire());
+
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine("#######################################################");
         }
     }
 }
