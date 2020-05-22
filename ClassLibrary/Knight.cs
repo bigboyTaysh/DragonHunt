@@ -16,7 +16,7 @@ namespace ClassLibrary
 		}
 
 		public Knight(string name, int level = 1, int experiencePoints = 0, int strength = 10,
-			int dexternity = 5, int intelligence = 5, int maximumHitPoints = 20, int damage = 30, int defense = 30, int attacksPerRound = 1) 
+			int dexternity = 5, int intelligence = 5, int maximumHitPoints = 150, int damage = 30, int defense = 30, int attacksPerRound = 1) 
 			: base (name, level, experiencePoints, strength, dexternity, intelligence, maximumHitPoints, damage, defense)
 		{
 			AttacksPerRound = attacksPerRound;
@@ -25,7 +25,7 @@ namespace ClassLibrary
 		public override string ToString()
 		{
 			return base.ToString() + 
-				$"APR: {AttacksPerRound}";
+				$"APR: {AttacksPerRound}\n";
 		}
 
 		public override void LevelUp()
@@ -34,10 +34,14 @@ namespace ClassLibrary
 			Strength += 15;
 			Dexternity += 5;
 			Intelligence += 5;
-			MaximumHitPoints += 30;
+			MaximumHitPoints += 40;
 			HitPoints = MaximumHitPoints;
-			Damage += 10;
-			Defense += 30;
+			Damage += 20;
+            Defense += 30;
+			if(Level % 2 == 0)
+            {
+				AttacksPerRound += 1;
+			}
 		}
 	}
 }

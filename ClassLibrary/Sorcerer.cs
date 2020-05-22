@@ -26,7 +26,7 @@ namespace ClassLibrary
 		}
 
 		public Sorcerer(string name, int level = 1, int experiencePoints = 0, int strength = 5, int dexternity = 5,
-			int intelligence = 15, int maximumHitPoints = 15, int damage = 50, int defense = 30, int maximumManaPoints = 30) 
+			int intelligence = 15, int maximumHitPoints = 100, int damage = 50, int defense = 30, int maximumManaPoints = 30) 
 			: base(name, level, experiencePoints, strength, dexternity, intelligence, maximumHitPoints, damage, defense)
 		{
 			ManaPoints = maximumManaPoints;
@@ -45,7 +45,7 @@ namespace ClassLibrary
 			Strength += 5;
 			Dexternity += 5;
 			Intelligence += 10;
-			MaximumHitPoints += 10;
+			MaximumHitPoints += 20;
 			HitPoints = MaximumHitPoints;
 			Damage += 30;
 			Defense += 10;

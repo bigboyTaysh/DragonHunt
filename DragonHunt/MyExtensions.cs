@@ -30,10 +30,8 @@ namespace DragonHunt
         public static void IncreaseExperience(this Character character, int experience)
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-
             character.ExperiencePoints += experience;
 
-            Console.WriteLine($"{character.Name}: {experience}xp");
             while ((character.Level * 100) <= character.ExperiencePoints)
             {
                 character.LevelUp();

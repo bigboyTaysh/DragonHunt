@@ -67,15 +67,17 @@ namespace ClassLibrary
         {
             if (damage > Defense)
             {
-                HitPoints -= damage - Defense;
+                HitPoints = HitPoints - (damage - Defense);
                 if(HitPoints < 0)
                 {
                     HitPoints = 0;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{Name} - śmierć");
                 }
             }
             else
             {
-                Damage -= 1;
+                HitPoints -= 1;
             }
         }
 
@@ -86,9 +88,6 @@ namespace ClassLibrary
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(damage);
-
-            Console.ForegroundColor = ConsoleColor.White;
-
         }
 
         public abstract void LevelUp();

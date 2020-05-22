@@ -39,7 +39,7 @@ namespace DragonHunt
 
             ManaPoints -= mana;
 
-            return Damage + mana;
+            return Intelligence + mana;
         }
         public override void LevelUp()
         {
@@ -47,18 +47,23 @@ namespace DragonHunt
             Strength += 50;
             Dexternity += 50;
             Intelligence += 50;
-            MaximumHitPoints += 100;
+            MaximumHitPoints += 200;
             Damage += 50;
             Defense += 50;
         }
 
-        public void BreatheFire()
+        public int BreatheFire()
         {
-            int damage = Level * Intelligence / 2;
-            Console.WriteLine($"Smok {Name} zionie ogniem: {damage}");
+            int damage = Strength + Intelligence;
 
             Sound();
+
+            Console.Write($"Smok {Name} zionie ogniem: ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(damage + "\n");
+
             OnBreatheFire?.Invoke(damage);
+            return damage;
         }
 
         partial void Sound();

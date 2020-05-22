@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ClassLibrary;
 using ClassLibrary.Exceptions;
@@ -11,12 +12,12 @@ namespace DragonHunt
 {
     class Program
     {
+        static List<Character> characters = new List<Character>();
+        static List<Dragon> dragons = new List<Dragon>();
+
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.White;
-
-            List<Character> characters = new List<Character>();
-            List<Dragon> dragons = new List<Dragon>();
 
             Sorcerer sorcerer1 = new Sorcerer("Sorcerer1");
             Sorcerer sorcerer2 = new Sorcerer("Sorcerer2");
@@ -41,12 +42,19 @@ namespace DragonHunt
                 ExperiencePoints = 0,
                 Strength = 20,
                 Dexternity = 20,
-                Intelligence = 20,
-                MaximumHitPoints = 300,
+                Intelligence = 50,
+                HitPoints = 1750,
+                MaximumHitPoints = 1750,
                 Damage = 50,
                 Defense = 50
             };
-            dragon.OnBreatheFire += v => characters.ForEach(k => k.TakeDamage(v));
+            dragon.OnBreatheFire += v => characters.ForEach(c => 
+            {
+                if (!c.IsDead())
+                {
+                    c.TakeDamage(v);
+                }
+            });
 
             dragons.Add(dragon);
 
@@ -63,40 +71,148 @@ namespace DragonHunt
                 Console.WriteLine($"Imię: {item.Name}, {item.Level}");
             }
             */
-            Round(dragons, characters);
-        }
 
-        static void Round(List<Dragon> dragons, List<Character> characters)
-        {
-            characters.ForEach(v => 
+            int round = 0;
+            while(!characters.All(v => v.IsDead()) && !dragon.IsDead())
             {
-                dragons.ForEach(d => 
-                { 
-                    if(v is IMagic)
-                    {
-                        try
-                        {
-                            d.TakeDamage(((IMagic)v).CastSpell(20));
-                            v.DamageDealtPerRound(((IMagic)v).CastSpell(10));
-                        }
-                        catch (NoManaException e)
-                        {
-                            Console.WriteLine($"{v.Name} nie ma many!");
-                        }
-                    }
-                    else
-                    {
-                        d.TakeDamage(v.Damage);
-                        v.DamageDealtPerRound(v.Damage);
-                    }
-                });
-            }); 
-
-            dragons.ForEach(v => v.BreatheFire());
+                round++;
+                Round(round, 0);
+            }
 
             Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"\n-----------------------------END-----------------------------------");
+            Console.WriteLine($"------------------------- Round: {round} --------------------------");
 
-            Console.WriteLine("#######################################################");
+            Stats();
+
+            if (characters.All(v => v.IsDead()))
+            {
+                Console.WriteLine($"------------------------- Smok wygrał ---------------------------------");
+            }
+            else
+            {
+                Console.WriteLine($"----------------------- Drużyna wygrała ---------------------------------");
+            }
+        }
+
+        static void Round(int round, int sleep)
+        {
+
+            Stats();
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"-------------------------------------------------------------------");
+            Console.WriteLine($"------------------------- Round: {round} --------------------------");
+            Console.WriteLine($"-------------------------------------------------------------------");
+
+            Console.WriteLine();
+
+            Thread.Sleep(sleep);
+
+            characters.ForEach(c => 
+            {
+                dragons
+                .ForEach(d => 
+                {
+                    if (!d.IsDead())
+                    {
+                        if (c is IMagic)
+                        {
+                            try
+                            {
+                                c.DamageDealtPerRound(((IMagic)c).CastSpell(10));
+                                d.TakeDamage(((IMagic)c).CastSpell(10));
+                            }
+                            catch (NoManaException e)
+                            {
+                                Console.WriteLine($"{c.Name} nie ma many!");
+                            }
+                        }
+                        else
+                        {
+                            if(c is Knight)
+                            {
+                                int knightDamage = 0;
+                                for (int i = 1; i <= ((Knight)c).AttacksPerRound; i++)
+                                {
+                                    knightDamage += c.Damage;
+                                    d.TakeDamage(c.Damage);
+                                }
+                                c.DamageDealtPerRound(knightDamage);
+                            }
+                            else
+                            {
+                                c.DamageDealtPerRound(c.Damage);
+                                d.TakeDamage(c.Damage);
+                            }
+                        }
+                    }
+                });
+            });
+
+            Thread.Sleep(sleep);
+
+            Console.WriteLine();
+
+
+            dragons.ForEach(d => 
+            {
+                if (!d.IsDead())
+                {
+                    d.BreatheFire();
+                }
+            });
+
+            Thread.Sleep(sleep);
+
+
+            characters.ForEach(c => 
+            {
+                if (!c.IsDead())
+                {
+                    c.IncreaseExperience(200 / round);
+                }
+            });
+
+            dragons.ForEach(d => 
+            {
+                if (!d.IsDead())
+                {
+                    d.IncreaseExperience(35);
+                }
+            });
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("#####################################################################");
+            Console.WriteLine("#####################################################################");
+            Console.WriteLine("#####################################################################");
+        }
+
+        static void Stats()
+        {
+            characters.ForEach(c =>
+            {
+                string info = c.ToString();
+                Console.Write(info.Substring(0, 6));
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(info.Substring(6, (info.IndexOf("Level", StringComparison.Ordinal)) - 6));
+
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine(info.Substring((info.IndexOf("Level", StringComparison.Ordinal))), info.Length);
+            });
+
+            dragons.ForEach(d =>
+            {
+                string info = d.ToString();
+                Console.Write(info.Substring(0, 6));
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(info.Substring(6, (info.IndexOf("Level", StringComparison.Ordinal)) - 6));
+
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine(info.Substring((info.IndexOf("Level", StringComparison.Ordinal))), info.Length);
+            });
         }
     }
 }

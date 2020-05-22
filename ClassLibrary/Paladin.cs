@@ -8,6 +8,7 @@ namespace ClassLibrary
 {
     public class Paladin : Character
     {
+		Random random;
 		private int _dodgeChance;
 
 		public int DodgeChance
@@ -17,7 +18,7 @@ namespace ClassLibrary
 		}
 
 		public Paladin(string name, int level = 1, int experiencePoints = 0, int strength = 5, int dexternity = 15,
-			int intelligence = 5, int maximumHitPoints = 15, int damage = 50, int defense = 30, int dodgeChance = 10) 
+			int intelligence = 5, int maximumHitPoints = 100, int damage = 50, int defense = 30, int dodgeChance = 20) 
 			: base(name, level, experiencePoints, strength, dexternity, intelligence, maximumHitPoints, damage, defense)
 		{
 			DodgeChance = dodgeChance;
@@ -31,20 +32,24 @@ namespace ClassLibrary
 
 		public override void TakeDamage(int damage)
 		{
-			Random random = new Random();
-			if(random.Next(100) > DodgeChance)
+			random = new Random();
+
+			if (random.Next(100) > DodgeChance)
 			{
-				if(Damage > Defense)
+				if (damage > Defense)
 				{
-					Damage -= Damage - Defense;
-				}
-				else
-				{
-					Damage -= 1;
+					HitPoints = HitPoints - (damage - Defense);
+					if (HitPoints < 0)
+					{
+						HitPoints = 0;
+						Console.ForegroundColor = ConsoleColor.Red;
+						Console.WriteLine($"{Name} - śmierć");
+					}
 				}
 			}
 			else
 			{
+				Console.ForegroundColor = ConsoleColor.Gray;
 				Console.WriteLine($"{Name}: unik!");
 			}
 		}
@@ -55,10 +60,10 @@ namespace ClassLibrary
 			Strength += 5;
 			Dexternity += 15;
 			Intelligence += 5;
-			MaximumHitPoints += 15;
-			Damage += 15;
+			MaximumHitPoints += 30;
+			Damage += 20;
 			Defense += 15;
-			DodgeChance += 2;
+			DodgeChance += 5;
 		}
 	}
 }
