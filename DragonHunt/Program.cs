@@ -48,6 +48,7 @@ namespace DragonHunt
                 Damage = 50,
                 Defense = 50
             };
+
             dragon.OnBreatheFire += v => characters.ForEach(c => 
             {
                 if (!c.IsDead())
@@ -63,14 +64,14 @@ namespace DragonHunt
             //paladin1.IncreaseExperience(50);
             //MyExtensions.IncreaseExperience(paladin2, 50);
 
-            //var under1Level = characters.Where(v => v.Level > 1).Select(v => new { v.Name, v.Level});
+            var result = characters.Where(v => v.Level > 0).Select(v => new { v.Name, v.Level });
 
-            /*
-            foreach (var item in under1Level)
+            foreach (var item in result)
             {
                 Console.WriteLine($"Imię: {item.Name}, {item.Level}");
             }
-            */
+
+            Console.WriteLine();
 
             int round = 0;
             while(!characters.All(v => v.IsDead()) && !dragon.IsDead())
